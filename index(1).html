@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .clock1 {
+        width: 200px;
+        height: 40px;
+        border: 1px solid red;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 40px;
+        border-radius: 10px;
+    }
+    .clock2 {
+        width: 200px;
+        height: 200px;
+        border: 1px solid blue;
+        margin: 50px auto;
+        position: relative;
+        border-radius: 50%;
+    }
+    .clock2 div{
+        transform-origin: bottom;
+    }
+    .clock2 div:nth-child(1) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 2px;
+        height: 80px;
+        background-color: #000;
+    }
+    .clock2 div:nth-child(2) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        margin-top: 40px;
+        width: 4px;
+        height: 60px;
+        background-color: red;
+    }
+    .clock2 div:nth-child(3) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        margin-top: 60px;
+        width: 6px;
+        height: 40px;
+        background-color: yellow;
+    }
+    .clock2 span{
+        display: block;
+        width: 2px;
+        height: 5px;
+        background-color: #000;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform-origin: 0 100px;
+    }
+    .clock2 span:nth-of-type(1){
+        transform: rotate(90deg)
+    }
+</style>
+
+<body>
+    <!-- 电子 -->
+    <div class="clock1">
+        <span>2019</span>/
+        <span>3</span>/
+        <span>14</span>&nbsp;&nbsp;
+        <span>12</span>:
+        <span>00</span>:
+        <span>00</span>
+    </div>
+
+    <!-- 表盘 -->
+    <div class="clock2">
+        <div></div>
+        <div></div>
+        <div></div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+<script>
+    // 日期对象
+    // 定义一个日期
+    // let date1 = new Date()
+    // 定义具体时间
+    // let date2 = new Date("2019/10/1 12:00:00")
+    // let date3 = new Date("12:00:00 2019/10/1")
+    // let date4 = new Date(2019,10,1,12)   //出来的是11月
+    // console.dir(date1)
+    // console.dir(date2)
+    // console.dir(date3)
+    // console.dir(date4)
+
+    // 日期对象的方法    格林尼治时间：英国格林尼治正午的时间（有误差）  UTC：世界协调时
+    // console.dir(Date)
+    // 获取时间的方法
+    // let year = date1.getFullYear()      //get 年
+    // let month = date1.getMonth()        //get 月  从0开始
+    // let date = date1.getDate()     //get 日
+    // let hour = date1.getHours()     //get 时
+    // let min = date1.getMinutes()     //get 分
+    // let sec = date1.getSeconds()     //get 秒
+    // let msec = date1.getMilliseconds   //get 毫秒
+    // let week = date1.getDay()       //get 星期
+    // let time = date1.getTime()      //1970.1.1 至今的毫秒数  计算机元年
+    // console.log(year)
+
+    // 设置时间的方法
+    // date1.setFullYear(2020)
+    // date1.setMonth(0)
+    // date1.setDate(1)
+    // date1.setHours(12)
+    // date1.setMinutes(30)
+    // date1.setSeconds(30)
+
+    // console.log(date1)
+
+
+
+    // 电子和表盘
+    let spans = document.querySelectorAll(".clock1 span")
+    let divs = document.querySelectorAll(".clock2 div")
+
+    setInterval(function(){
+        let now = new Date()
+        let year = now.getFullYear()
+        let month = now.getMonth()
+        let date = now.getDate()
+        let hour = now.getHours()
+        let min = now.getMinutes()
+        let sec = now.getSeconds()
+        spans[0].innerHTML = year
+        spans[1].innerHTML = month+1
+        spans[2].innerHTML = date
+        spans[3].innerHTML = hour
+        spans[4].innerHTML = min
+        spans[5].innerHTML = sec
+
+        divs[0].style.transform = `rotate(${6 * sec}deg)`
+        divs[1].style.transform = `rotate(${6 * min}deg)`
+        divs[2].style.transform = `rotate(${30 * hour}deg)`
+    },1000)
+
+    let spans2 = document.querySelectorAll(".clock2 span")
+    spans2.forEach(function(item,i){
+        item.style.transform = `rotate(${30*i}deg)`
+    })
+
+</script>
+</html>
